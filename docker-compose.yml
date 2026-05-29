@@ -63,16 +63,6 @@ services:
     depends_on:
       - prometheus
 
-  streamlit:
-    build: ./streamlit_app
-    container_name: image-classifier-streamlit
-    ports:
-      - "8501:8501"
-    environment:
-      API_URL: http://api:8080
-    depends_on:
-      - api
-
 volumes:
   prometheus_data:
   grafana_data:

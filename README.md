@@ -1,6 +1,6 @@
 # Triton Image Classification Stack
 
-Полнофункциональный проект разворачивания модели классификации изображений через NVIDIA Triton Inference Server. Решение включает FastAPI Gateway, Swagger UI, Streamlit-интерфейс, Prometheus и Grafana-дэшборд.
+Полнофункциональный проект разворачивания модели классификации изображений через NVIDIA Triton Inference Server. Решение включает FastAPI Gateway, Swagger UI, Prometheus и Grafana-дэшборд.
 
 Модель классифицирует изображения птиц по трем классам:
 
@@ -25,12 +25,6 @@
 - Возвращает предсказанный класс, confidence, probabilities и время инференса.
 - Предоставляет Swagger UI для ручной проверки API.
 
-### Streamlit UI
-
-- Позволяет загрузить изображение через браузер.
-- Отображает предсказанный класс, уверенность, время Triton, полное время запроса и вероятности по классам.
-- Работает как отдельный Docker-сервис.
-
 ### Prometheus + Grafana
 
 - Prometheus собирает метрики Triton.
@@ -43,7 +37,6 @@
 |---|---|
 | NVIDIA Triton | Инференс ONNX-модели |
 | FastAPI | REST API Gateway |
-| Streamlit | Пользовательский веб-интерфейс |
 | Prometheus | Сбор метрик |
 | Grafana | Визуализация метрик |
 | Docker Compose | Запуск всего стека |
@@ -70,11 +63,6 @@ triton-classification/
 │   ├── requirements.txt
 │   └── main.py
 │
-├── streamlit_app/
-│   ├── Dockerfile
-│   ├── requirements.txt
-│   └── app.py
-│
 ├── prometheus/
 │   └── prometheus.yml
 │
@@ -85,15 +73,9 @@ triton-classification/
 │       └── dashboards/
 │           ├── dashboards.yml
 │           └── triton.json
-│
-├── results/
-│   ├── dynamic_batching_results.md
-│   ├── dynamic_batching_results.json
-│   └── dynamic_batching_comparison.svg
-│
-└── screenshots/
-    └── .gitkeep
 ```
+
+Папка `results/` не хранится в репозитории и создается локально при запуске `benchmark_dynamic_batching.py`.
 
 ## Быстрый старт
 
@@ -149,7 +131,6 @@ curl http://localhost:8000/v2/models/image_classifier
 |---|---|---|
 | FastAPI | http://localhost:8080 | REST API |
 | Swagger UI | http://localhost:8080/docs | Документация и ручной тест `/predict` |
-| Streamlit | http://localhost:8501 | Веб-интерфейс классификации |
 | Triton HTTP | http://localhost:8000 | Triton HTTP API |
 | Triton gRPC | localhost:8001 | Triton gRPC API |
 | Triton Metrics | http://localhost:8002/metrics | Метрики для Prometheus |
@@ -241,22 +222,6 @@ instance_group [
 ]
 ```
 
-## Streamlit
-
-Запуск только Streamlit-сервиса:
-
-```bash
-docker compose up -d --build streamlit
-```
-
-Открыть интерфейс:
-
-```text
-http://localhost:8501
-```
-
-Интерфейс позволяет загрузить изображение птицы и выполнить классификацию через FastAPI/Triton.
-
 ## Мониторинг
 
 Prometheus собирает метрики Triton с адреса:
@@ -295,6 +260,8 @@ python3 -u benchmark_dynamic_batching.py \
   --results-dir results
 ```
 
+Папка `results/` создается локально при запуске benchmark-скрипта и не хранится в репозитории.
+
 Результаты:
 
 | Конфигурация | preferred_batch_size | max_queue_delay_microseconds | Avg Latency (ms) | P95 (ms) | P99 (ms) | Throughput (RPS) | Success |
@@ -305,16 +272,6 @@ python3 -u benchmark_dynamic_batching.py \
 | Large batch | [8, 16, 32] | 200000 | 377.22 | 479.11 | 525.50 | 130.34 | 1000/1000 |
 
 Вывод: dynamic batching почти в 2 раза увеличил throughput и снизил среднюю задержку. Наилучший баланс между throughput и latency показала конфигурация `[4, 8, 16]` с `max_queue_delay_microseconds=100000`.
-
-## Скриншоты
-
-Рекомендуемые файлы для отчета и GitHub:
-
-```text
-screenshots/swagger-predict.png
-screenshots/grafana-dashboard.png
-screenshots/streamlit-result.png
-```
 
 ## Поддержка GPU
 
@@ -335,7 +292,7 @@ instance_group [
 
 - Docker Desktop / Docker Engine
 - Docker Compose
-- 8 GB RAM желательно для комфортного запуска Triton, Grafana, Prometheus, FastAPI и Streamlit
+- 8 GB RAM желательно для комфортного запуска Triton, Grafana, Prometheus и FastAPI
 - macOS/Linux/Windows с Docker
 
 ## Остановка
