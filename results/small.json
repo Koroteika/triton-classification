@@ -1,0 +1,25 @@
+{
+  "mode": "small",
+  "title": "Small batch",
+  "settings": {
+    "title": "Small batch",
+    "preferred_batch_size": [
+      2,
+      4
+    ],
+    "max_queue_delay_microseconds": 50000
+  },
+  "summary": {
+    "total_requests": 1000,
+    "successful_requests": 1000,
+    "failed_requests": 0,
+    "duration_seconds": 7.8779,
+    "throughput_rps": 126.9382,
+    "avg_latency_ms": 387.2973,
+    "p50_latency_ms": 387.7976,
+    "p95_latency_ms": 494.819,
+    "p99_latency_ms": 538.5941,
+    "min_latency_ms": 69.5301,
+    "max_latency_ms": 605.4683
+  }
+}

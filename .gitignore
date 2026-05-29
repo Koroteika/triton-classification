@@ -1,0 +1,13 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# Local-only benchmark scratch output.
+results_smoke/
+
+# Docker/Grafana local state is stored in named volumes, not in the repo.
+*.log

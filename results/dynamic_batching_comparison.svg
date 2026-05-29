@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="50" y="35" font-family="Arial" font-size="24" font-weight="700">Dynamic Batching Benchmark</text>
+<text x="50" y="535" font-family="Arial" font-size="14" fill="#555">Blue: avg latency (ms), Green: throughput (RPS)</text>
+<line x1="80" y1="60" x2="80" y2="420" stroke="#333"/>
+<line x1="80" y1="420" x2="1050" y2="420" stroke="#333"/>
+<rect x="134.6" y="60.0" width="60.6" height="360.0" fill="#4e79a7"/>
+<rect x="207.2" y="239.3" width="60.6" height="180.7" fill="#59a14f"/>
+<text x="164.9" y="52.0" text-anchor="middle" font-family="Arial" font-size="12">743.2</text>
+<text x="237.6" y="231.3" text-anchor="middle" font-family="Arial" font-size="12">65.4</text>
+<text x="201.2" y="455" text-anchor="middle" font-family="Arial" font-size="13">No batching</text>
+<rect x="377.1" y="232.4" width="60.6" height="187.6" fill="#4e79a7"/>
+<rect x="449.8" y="69.4" width="60.6" height="350.6" fill="#59a14f"/>
+<text x="407.4" y="224.4" text-anchor="middle" font-family="Arial" font-size="12">387.3</text>
+<text x="480.1" y="61.4" text-anchor="middle" font-family="Arial" font-size="12">126.9</text>
+<text x="443.8" y="455" text-anchor="middle" font-family="Arial" font-size="13">Small batch</text>
+<rect x="619.6" y="236.8" width="60.6" height="183.2" fill="#4e79a7"/>
+<rect x="692.2" y="62.0" width="60.6" height="358.0" fill="#59a14f"/>
+<text x="649.9" y="228.8" text-anchor="middle" font-family="Arial" font-size="12">378.2</text>
+<text x="722.6" y="54.0" text-anchor="middle" font-family="Arial" font-size="12">129.6</text>
+<text x="686.2" y="455" text-anchor="middle" font-family="Arial" font-size="13">Medium batch</text>
+<rect x="862.1" y="237.3" width="60.6" height="182.7" fill="#4e79a7"/>
+<rect x="934.8" y="60.0" width="60.6" height="360.0" fill="#59a14f"/>
+<text x="892.4" y="229.3" text-anchor="middle" font-family="Arial" font-size="12">377.2</text>
+<text x="965.1" y="52.0" text-anchor="middle" font-family="Arial" font-size="12">130.3</text>
+<text x="928.8" y="455" text-anchor="middle" font-family="Arial" font-size="13">Large batch</text>
+<text x="30" y="70" font-family="Arial" font-size="12">743 ms</text>
+<text x="970" y="70" font-family="Arial" font-size="12">130 RPS</text>
+<rect x="780" y="18" width="16" height="16" fill="#4e79a7"/>
+<text x="802" y="31" font-family="Arial" font-size="13">Avg latency</text>
+<rect x="900" y="18" width="16" height="16" fill="#59a14f"/>
+<text x="922" y="31" font-family="Arial" font-size="13">Throughput</text>
+</svg>

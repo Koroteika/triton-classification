@@ -1,0 +1,22 @@
+{
+  "mode": "none",
+  "title": "No batching",
+  "settings": {
+    "title": "No batching",
+    "preferred_batch_size": null,
+    "max_queue_delay_microseconds": null
+  },
+  "summary": {
+    "total_requests": 1000,
+    "successful_requests": 1000,
+    "failed_requests": 0,
+    "duration_seconds": 15.2827,
+    "throughput_rps": 65.4336,
+    "avg_latency_ms": 743.187,
+    "p50_latency_ms": 740.0017,
+    "p95_latency_ms": 895.7857,
+    "p99_latency_ms": 925.346,
+    "min_latency_ms": 38.9719,
+    "max_latency_ms": 943.9447
+  }
+}
