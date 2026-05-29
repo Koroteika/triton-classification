@@ -10,7 +10,6 @@ env/
 results_smoke/
 results/
 screenshots/
-streamlit_app/
 
 # Docker/Grafana local state is stored in named volumes, not in the repo.
 *.log

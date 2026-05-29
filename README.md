@@ -1,6 +1,6 @@
 # Triton Image Classification Stack
 
-Полнофункциональный проект разворачивания модели классификации изображений через NVIDIA Triton Inference Server. Решение включает FastAPI Gateway, Swagger UI, Prometheus и Grafana-дэшборд.
+Полнофункциональный проект разворачивания модели классификации изображений через NVIDIA Triton Inference Server. Решение включает FastAPI Gateway, Swagger UI, Streamlit-интерфейс, Prometheus и Grafana-дэшборд.
 
 Модель классифицирует изображения птиц по трем классам:
 
@@ -25,6 +25,12 @@
 - Возвращает предсказанный класс, confidence, probabilities и время инференса.
 - Предоставляет Swagger UI для ручной проверки API.
 
+### Streamlit UI
+
+- Позволяет загрузить изображение через браузер.
+- Отображает предсказанный класс, уверенность, время Triton, полное время запроса и вероятности по классам.
+- Запускается одной командой вместе с остальным стеком через Docker Compose.
+
 ### Prometheus + Grafana
 
 - Prometheus собирает метрики Triton.
@@ -37,6 +43,7 @@
 |---|---|
 | NVIDIA Triton | Инференс ONNX-модели |
 | FastAPI | REST API Gateway |
+| Streamlit | Пользовательский веб-интерфейс |
 | Prometheus | Сбор метрик |
 | Grafana | Визуализация метрик |
 | Docker Compose | Запуск всего стека |
@@ -62,6 +69,11 @@ triton-classification/
 │   ├── Dockerfile
 │   ├── requirements.txt
 │   └── main.py
+│
+├── streamlit_app/
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   └── app.py
 │
 ├── prometheus/
 │   └── prometheus.yml
@@ -131,6 +143,7 @@ curl http://localhost:8000/v2/models/image_classifier
 |---|---|---|
 | FastAPI | http://localhost:8080 | REST API |
 | Swagger UI | http://localhost:8080/docs | Документация и ручной тест `/predict` |
+| Streamlit | http://localhost:8501 | Веб-интерфейс классификации |
 | Triton HTTP | http://localhost:8000 | Triton HTTP API |
 | Triton gRPC | localhost:8001 | Triton gRPC API |
 | Triton Metrics | http://localhost:8002/metrics | Метрики для Prometheus |
@@ -222,6 +235,22 @@ instance_group [
 ]
 ```
 
+## Streamlit
+
+Streamlit-интерфейс поднимается вместе с основным стеком:
+
+```bash
+docker compose up -d --build
+```
+
+Открыть интерфейс:
+
+```text
+http://localhost:8501
+```
+
+Интерфейс позволяет загрузить изображение птицы, выполнить классификацию через FastAPI/Triton и увидеть класс, уверенность, время Triton, полное время запроса и вероятности по классам.
+
 ## Мониторинг
 
 Prometheus собирает метрики Triton с адреса:
@@ -292,7 +321,7 @@ instance_group [
 
 - Docker Desktop / Docker Engine
 - Docker Compose
-- 8 GB RAM желательно для комфортного запуска Triton, Grafana, Prometheus и FastAPI
+- 8 GB RAM желательно для комфортного запуска Triton, Grafana, Prometheus, FastAPI и Streamlit
 - macOS/Linux/Windows с Docker
 
 ## Остановка
